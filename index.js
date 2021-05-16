@@ -3,6 +3,10 @@ VEL = 25;
 NUM_GENES = 250;
 MUTATION_RATE = 0.02;
 
+averageFitness = 0;
+generation = 0;
+balls = [];
+
 document.addEventListener("load", setupState);
 
 function setupState() {
