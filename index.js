@@ -9,6 +9,18 @@ balls = [];
 
 document.addEventListener("load", setupState);
 
+class Ball {
+  constructor(x, y, context) {
+    this.x = x;
+    this.y = y;
+    this.context = context;
+    this.radius = 10;
+    this.index = 0;
+    this.fitness = 0;
+    this.done = false;
+  }
+}
+
 function setupState() {
   var canvas = document.querySelector("canvas");
   var context = canvas.getContext("2d");
