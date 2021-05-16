@@ -19,6 +19,14 @@ class Ball {
     this.fitness = 0;
     this.done = false;
   }
+
+  draw() {
+    this.context.fillStyle = "rgb(173, 216, 230)";
+    if (this.done) this.context.fillStyle = "rgb(32, 171, 56)";
+    this.context.beginPath();
+    this.context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
+    this.context.fill();
+  }
 }
 
 function setupState() {
