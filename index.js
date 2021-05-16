@@ -38,6 +38,11 @@ class Ball {
       this.genes[i] = [Math.random() - 0.5, Math.random() - 0.5];
     }
   }
+
+  calculateFitness() {
+    const distance = Math.sqrt((this.x - 400) ** 2 + (this.y - 765) ** 2);
+    this.fitness = Math.max(0, 1 - distance / 800);
+  }
 }
 
 function setupState() {
