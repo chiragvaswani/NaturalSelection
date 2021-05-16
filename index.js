@@ -27,6 +27,10 @@ class Ball {
     this.context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
     this.context.fill();
   }
+
+  setGenes(genes) {
+    this.genes = genes;
+  }
 }
 
 function setupState() {
