@@ -31,6 +31,13 @@ class Ball {
   setGenes(genes) {
     this.genes = genes;
   }
+
+  setRandomGenes() {
+    this.genes = [];
+    for (let i = 0; i < NUM_GENES; i++) {
+      this.genes[i] = [Math.random() - 0.5, Math.random() - 0.5];
+    }
+  }
 }
 
 function setupState() {
