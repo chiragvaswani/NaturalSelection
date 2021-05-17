@@ -43,6 +43,17 @@ class Ball {
     const distance = Math.sqrt((this.x - 400) ** 2 + (this.y - 765) ** 2);
     this.fitness = Math.max(0, 1 - distance / 800);
   }
+
+  update() {
+    if (300 < this.x && this.x < 420 && this.y > 745 && this.y < 785) {
+      this.done = true;
+      this.index++;
+    } else if (this.index < NUM_GENES) {
+      this.x += VEL * this.genes[this.index][0];
+      this.y += VEL * this.genes[this.index][1];
+      this.index++;
+    }
+  }
 }
 
 function setupState() {
