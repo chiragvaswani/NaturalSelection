@@ -7,7 +7,7 @@ averageFitness = 0;
 generation = 0;
 balls = [];
 
-document.addEventListener("load", setupState);
+document.addEventListener("DOMContentLoaded", setupState);
 
 class Ball {
   constructor(x, y, context) {
@@ -57,6 +57,7 @@ class Ball {
 }
 
 function setupState() {
+  console.log("Set up started");
   var canvas = document.querySelector("canvas");
   var context = canvas.getContext("2d");
   for (let i = 0; i < NUM_BALLS; i++) {
@@ -89,4 +90,44 @@ function animateLoop() {
   );
 
   if (balls[0].index == NUM_GENES) nextGen();
+}
+
+function nextGen() {
+  generation++;
+  console.log("Generation: ", generation);
+
+  var canvas = document.querySelector("canvas");
+  var context = canvas.getContext("2d");
+
+  var candidates = [];
+  var totalFitness = 0;
+  for (let i = 0; i < NUM_BALLS; i++) {
+    var ball = balls[i];
+    ball.calculateFitness();
+    totalFitness += ball.fitness;
+    for (let j = 0; j < 2 ** (ball.fitness * 10); j++) candidates.push(ball);
+  }
+  averageFitness = totalFitness / NUM_BALLS;
+  console.log("Average fitness:", averageFitness);
+
+  var newBalls = [];
+  for (let i = 0; i < NUM_BALLS; i++) {
+    // Parent 1
+    var parent1 = candidates[Math.floor(Math.random() * candidates.length)];
+    // Parent 2
+    var parent2 = candidates[Math.floor(Math.random() * candidates.length)];
+    // Child
+    var child = new Ball(395, 25, context);
+
+    genes = [];
+    for (let j = 0; j < NUM_GENES; j++) {
+      if (Math.random() < MUTATION_RATE)
+        genes.push([Math.random() - 0.5, Math.random() - 0.5]);
+      else if (j % 2) genes.push(parent1.genes[j]);
+      else genes.push(parent2.genes[j]);
+    }
+    ball.setGenes(genes);
+    newBalls.push(ball);
+  }
+  balls = newBalls;
 }
