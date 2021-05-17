@@ -45,7 +45,7 @@ class Ball {
   }
 
   update() {
-    if (300 < this.x && this.x < 420 && this.y > 745 && this.y < 785) {
+    if (380 < this.x && this.x < 420 && this.y > 745 && this.y < 785) {
       this.done = true;
       this.index++;
     } else if (this.index < NUM_GENES) {
@@ -59,6 +59,7 @@ class Ball {
 function setupState() {
   console.log("Set up started");
   var canvas = document.querySelector("canvas");
+  console.log(canvas);
   var context = canvas.getContext("2d");
   for (let i = 0; i < NUM_BALLS; i++) {
     var ball = new Ball(395, 25, context);
@@ -66,6 +67,14 @@ function setupState() {
     balls.push(ball);
   }
   animateLoop();
+}
+
+function loop() {
+  if (generation === 2000) return;
+  for (let i = 0; i < NUM_GENES; i++)
+    for (let j = 0; j < NUM_BALLS; j++) balls[j].update();
+  nextGen();
+  loop();
 }
 
 function animateLoop() {
