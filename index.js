@@ -66,3 +66,27 @@ function setupState() {
   }
   animateLoop();
 }
+
+function animateLoop() {
+  var canvas = document.querySelector("canvas");
+  var context = canvas.getContext("2d");
+  requestAnimationFrame(animateLoop);
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  for (let i = 0; i < NUM_BALLS; i++) {
+    var ball = balls[i];
+    ball.update();
+    ball.draw();
+  }
+
+  context.fillStyle = "rgb(173, 216, 230)";
+  context.fillRect(380, 745, 40, 40);
+  context.fillStyle = "rgb(0,0,0)";
+  context.fillText("Generation: " + generation.toString(), 15, 45);
+  context.fillText(
+    "Average fitness: " + averageFitness.toFixed(2).toString(),
+    15,
+    90
+  );
+
+  if (balls[0].index == NUM_GENES) nextGen();
+}
