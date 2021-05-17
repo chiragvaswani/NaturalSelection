@@ -82,6 +82,7 @@ function animateLoop() {
   context.fillStyle = "rgb(173, 216, 230)";
   context.fillRect(380, 745, 40, 40);
   context.fillStyle = "rgb(0,0,0)";
+  context.font = "30px Arial";
   context.fillText("Generation: " + generation.toString(), 15, 45);
   context.fillText(
     "Average fitness: " + averageFitness.toFixed(2).toString(),
